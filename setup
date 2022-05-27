@@ -1,0 +1,67 @@
+cfdisk -z /dev/nvme0n1
+
+mkfs.fat -F 32 /dev/nvme0n1p1
+mkfs.f2fs -f -l root -O extra_attr,inode_checksum,sb_checksum,compression /dev/nvme0m1p2
+mkswap /dev/nvme0n1p3
+
+mkdir /mnt/boot
+
+mount /dev/nvme0n1p1 /mtn/boot
+mount /dev/nvme0n1p2 /mnt
+swapon /dev/nvme0n1p3
+
+pacstrap -i /mnt base base-devel linux linux-firmware intel-ucode efibootmgr linux-firmware-qlogic linux-headers f2fs-tools reflector sudo neovim git zstd pulseaudio pavucontrol dhcpcd xorg-server xorg-xinit i3-gaps i3status alacritty redshift rofi sbxkb dunst feh flameshot lxappearance chromium powerline powerline-fonts noto-fonts-cjk noto-fonts-emoji ttf-dejavu ttf-font-awesome ttf-nerd-fonts-symbols ttf-ubuntu-font-family
+
+
+genfstab -U /mnt >> /mnt/etc/fstab
+
+arch-chroot /mnt
+
+# /etc/locale.gen
+locale-gen
+localectl set-locale ru_RU.UTF-8
+
+/etc/vconsole.conf
+FONT=cyr-sun16
+KEYMAP=ru
+
+/etc/modprobe.d/nobeep.conf
+blacklist pcspkr
+
+ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+
+echo $hostname > /etc/hostname
+
+mkinitcpio -P
+
+passwd
+
+useradd -m -G wheel -s /bin/bash $username
+passwd $username
+
+EDITOR=nano visudo
+Uncomment '%wheel ALL=(ALL) ALL'
+
+systemctl enable dhcpcd
+
+efibootmgr -d /dev/nvme0n1 -p 1 -c -L "ArchLinux" -l /vmlinuz-linux -u "root=/dev/nvme0n1p2 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
+exit
+umount -R /mnt
+reboot
+
+# ~/.bashrc
+export PATH="$PATH:/home/sergey/.local/bin"
+alias yt='yt-dlp'
+alias yta='yt-dlp -f 'ba' -x --audio-format mp3'
+alias mvp='mpv'
+alias reflectorstart="sudo reflector --verbose --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist"
+
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. /usr/share/powerline/bindings/bash/powerline.sh
+
+# ~/.tmux.conf
+unbind-key C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix

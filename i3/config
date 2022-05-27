@@ -1,0 +1,180 @@
+font pango:Ubuntu Medium 13
+smart_gaps on
+smart_borders on
+gaps inner 3
+client.focused              #2373a1 #2f343f #d8dee8 #bf616a #d8dee8
+client.focused_inactive     #2f343f #414a5c #d8dee8 #2f343f #2f343f
+client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.urgent               #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.placeholder          #2f343f #2f343f #d8dee8 #2f343f #2f343f
+client.background           #2f343f
+
+bar {
+	status_command i3status
+	position top
+	colors {
+	background #1c1c1c
+    }
+}
+
+# autostart
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id feh --bg-scale $HOME/.wallpapers/witch.jpg
+exec --no-startup-id dunst
+exec --no-startup-id setxkbmap -layout 'us,ru' -option 'grp:caps_toggle,grp_led: caps'
+exec --no-startup-id redshift -l 45.039268:38.987221
+exec --no-startup-id flameshot
+exec --no-startup-id telegram-desktop -startintray
+
+
+# keybinds
+set $mod Mod4
+bindsym $mod+F1 exec firefox
+bindsym $mod+F2 exec subl
+bindsym $mod+F3 exec gimp; workspace 3:gimp
+bindsym $mod+F4 exec keepassxc
+bindsym $mod+F5 exec telegram-desktop
+bindsym $mod+F6 exec discord
+bindsym $mod+F7 exec rhythmbox; workspace 7:music
+bindsym $mod+F8 exec virt-manager; workspace 8:kvm
+bindsym $mod+d exec rofi -show run
+bindsym $mod+e exec pcmanfm
+bindsym $mod+Return exec alacritty
+bindsym Print exec flameshot gui
+bindsym $mod+q kill
+
+assign [class="Nvim"] → 2:editor
+assign [class="Gimp"] → 3:gimp
+assign [class="Rhythmbox"] → 7:music
+assign [class="Virt-manager"] → 8:kvm
+
+
+# floating
+for_window [class="discord"] floating enable
+for_window [class="feh"] floating enable
+for_window [class="ffplay"] floating enable
+for_window [class="KeePassXC"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="obs"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Pcmanfm"] floating enable
+for_window [class="Rhythmbox"] floating enable
+for_window [class="Subl"] floating enable
+for_window [class="Telegram"] floating enable
+for_window [class="Virt-manager"] floating enable
+
+
+# Use pactl to adjust volume in PulseAudio.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# change focus:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move window:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+w layout tabbed
+bindsym $mod+s layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+space floating toggle
+
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+set $ws1 "1:browser"
+set $ws2 "2:terminal"
+set $ws3 "3:gimp"
+set $ws4 "4:multiple"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Грохнуть иксы?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# powermenu
+set $mode_system System (e)logout, (r)reboot, (Shift+s)shutdown
+mode "$mode_system" {
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+End mode "$mode_system"
