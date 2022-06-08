@@ -31,7 +31,7 @@ ethernet _first_ {
         format_down = "eth"
 }
 
-ethernet CloudflareWARP {
+ethernet cloudflare {
         format_up = "<span foreground='#f55b27'>cloudflare</span>"
         format_down = "cloudflare"
 }
