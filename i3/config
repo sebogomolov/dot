@@ -37,6 +37,7 @@ bindsym $mod+F5 exec telegram-desktop
 bindsym $mod+F6 exec discord
 bindsym $mod+F7 exec rhythmbox; workspace 7:music
 bindsym $mod+F8 exec virt-manager; workspace 8:kvm
+bindsym $mod+F9 exec obs; workspace 9:obs
 bindsym $mod+d exec rofi -show run
 bindsym $mod+e exec pcmanfm
 bindsym $mod+Return exec alacritty
@@ -63,6 +64,7 @@ for_window [class="Rhythmbox"] floating enable
 for_window [class="Subl"] floating enable
 for_window [class="Telegram"] floating enable
 for_window [class="Virt-manager"] floating enable
+for_window [class="tigervnc"] floating enable
 
 
 # Use pactl to adjust volume in PulseAudio.
