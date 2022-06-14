@@ -51,14 +51,16 @@ umount -R /mnt
 reboot
 
 
-# configs
+########### configs ###########
 
 # ~/.bashrc
-export PATH="$PATH:/home/sergey/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
+alias vi='nvim'
+alias vi='nvim'
 alias yt='yt-dlp'
 alias yta='yt-dlp -f 'ba' -x --audio-format mp3'
-alias mvp='mpv'
-alias reflectorstart="sudo reflector --verbose --protocol https --latest 20 --sort rate --save /etc/pacman.d/mirrorlist"
+alias reflectorstart='sudo reflector --verbose --latest 20 --threads 5 --sort rate --save /etc/pacman.d/mirrorlist'
+alias vnclen='ssh -fL 9901:localhost:5901 len sleep 10; vncviewer localhost:9901 PasswordFile=~/doc/passwd'
 
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
