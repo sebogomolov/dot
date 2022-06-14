@@ -30,11 +30,11 @@ exec --no-startup-id telegram-desktop -startintray
 # keybinds
 set $mod Mod4
 bindsym $mod+F1 exec firefox
-bindsym $mod+F2 exec subl
+bindsym $mod+F2 exec gedit
 bindsym $mod+F3 exec gimp; workspace 3:gimp
 bindsym $mod+F4 exec keepassxc
-bindsym $mod+F5 exec telegram-desktop
-bindsym $mod+F6 exec discord
+bindsym $mod+F5 exec telegram-desktop; workspace 5:media
+bindsym $mod+F6 exec discord; workspace 5:media
 bindsym $mod+F7 exec rhythmbox; workspace 7:music
 bindsym $mod+F8 exec virt-manager; workspace 8:kvm
 bindsym $mod+F9 exec obs; workspace 9:obs
@@ -46,6 +46,8 @@ bindsym $mod+q kill
 
 assign [class="Nvim"] → 2:editor
 assign [class="Gimp"] → 3:gimp
+assign [class="Telegram"] → 5:media
+assign [class="discrod"] → 5:music
 assign [class="Rhythmbox"] → 7:music
 assign [class="Virt-manager"] → 8:kvm
 
@@ -61,7 +63,7 @@ for_window [class="obs"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Rhythmbox"] floating enable
-for_window [class="Subl"] floating enable
+for_window [class="Gedit"] floating enable
 for_window [class="Telegram"] floating enable
 for_window [class="Virt-manager"] floating enable
 for_window [class="tigervnc"] floating enable
@@ -112,8 +114,8 @@ bindsym $mod+a focus parent
 set $ws1 "1:browser"
 set $ws2 "2:terminal"
 set $ws3 "3:gimp"
-set $ws4 "4:multiple"
-set $ws5 "5"
+set $ws4 "4"
+set $ws5 "5:media"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
