@@ -10,7 +10,6 @@
 :set list
 :set omnifunc=htmlcomplete#CompleteTags
 
-
 call plug#begin()
 Plug 'https://github.com/vim-airline/vim-airline.git'
 Plug 'https://github.com/preservim/nerdtree.git'

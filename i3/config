@@ -19,7 +19,7 @@ bar {
 
 # autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id feh --bg-scale $HOME/.wallpapers/witch.jpg
+exec --no-startup-id feh --bg-scale $HOME/.wallpapers/treagle.jpg
 exec --no-startup-id dunst
 exec --no-startup-id setxkbmap -layout 'us,ru' -option 'grp:caps_toggle,grp_led: caps'
 exec --no-startup-id redshift -l 45.039268:38.987221
@@ -29,12 +29,12 @@ exec --no-startup-id telegram-desktop -startintray
 
 # keybinds
 set $mod Mod4
-bindsym $mod+F1 exec firefox
-bindsym $mod+F2 exec gedit
+bindsym $mod+F1 exec chromium
+bindsym $mod+F2 exec firefox; workspace 2:terminal
 bindsym $mod+F3 exec gimp; workspace 3:gimp
 bindsym $mod+F4 exec keepassxc
-bindsym $mod+F5 exec telegram-desktop; workspace 5:media
-bindsym $mod+F6 exec discord; workspace 5:media
+bindsym $mod+F5 exec telegram-desktop
+bindsym $mod+F6 exec discord
 bindsym $mod+F7 exec rhythmbox; workspace 7:music
 bindsym $mod+F8 exec virt-manager; workspace 8:kvm
 bindsym $mod+F9 exec obs; workspace 9:obs
@@ -44,10 +44,8 @@ bindsym $mod+Return exec alacritty
 bindsym Print exec flameshot gui
 bindsym $mod+q kill
 
-assign [class="Nvim"] → 2:editor
+assign [class="firefox"] → 2:terminal
 assign [class="Gimp"] → 3:gimp
-assign [class="Telegram"] → 5:media
-assign [class="discrod"] → 5:music
 assign [class="Rhythmbox"] → 7:music
 assign [class="Virt-manager"] → 8:kvm
 
@@ -63,7 +61,6 @@ for_window [class="obs"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Pcmanfm"] floating enable
 for_window [class="Rhythmbox"] floating enable
-for_window [class="Gedit"] floating enable
 for_window [class="Telegram"] floating enable
 for_window [class="Virt-manager"] floating enable
 for_window [class="tigervnc"] floating enable

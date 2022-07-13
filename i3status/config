@@ -12,7 +12,7 @@ general {
 
 order += "volume master"
 order += "ethernet _first_"
-order += "ethernet cloudflare"
+#order += "ethernet cloudflare"
 order += "cpu_usage"
 order += "memory"
 order += "tztime local"
