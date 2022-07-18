@@ -1,4 +1,4 @@
-font pango:Ubuntu Medium 13
+font pango:Ubuntu Medium 14
 smart_gaps on
 smart_borders on
 gaps inner 3
@@ -29,8 +29,8 @@ exec --no-startup-id telegram-desktop -startintray
 
 # keybinds
 set $mod Mod4
-bindsym $mod+F1 exec chromium
-bindsym $mod+F2 exec firefox; workspace 2:terminal
+bindsym $mod+F1 exec firefox
+bindsym $mod+F2 exec subl
 bindsym $mod+F3 exec gimp; workspace 3:gimp
 bindsym $mod+F4 exec keepassxc
 bindsym $mod+F5 exec telegram-desktop
@@ -42,9 +42,9 @@ bindsym $mod+d exec rofi -show run
 bindsym $mod+e exec pcmanfm
 bindsym $mod+Return exec alacritty
 bindsym Print exec flameshot gui
-bindsym $mod+q kill
+bindsym $mod+Shift+q kill
 
-assign [class="firefox"] → 2:terminal
+
 assign [class="Gimp"] → 3:gimp
 assign [class="Rhythmbox"] → 7:music
 assign [class="Virt-manager"] → 8:kvm

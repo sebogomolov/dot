@@ -9,50 +9,54 @@ general {
 }
 
 
-
-order += "volume master"
+order += "ethernet cloudflare"
 order += "ethernet _first_"
-#order += "ethernet cloudflare"
 order += "cpu_usage"
 order += "memory"
 order += "tztime local"
+order += "volume master"
 
+
+ethernet cloudflare {
+		format_up = "<span background='#1c1c1c' foreground='#f6821f'></span><span background='#f6821f' foreground='#fff' >  cloudflare  </span>"
+        format_down = "<span background='#1c1c1c' foreground='#f6821f'></span><span background='#f6821f' foreground='#e73c34' > cloudflare  </span>"
+		separator = false
+        separator_block_width = 0
+}
+
+ethernet _first_ {
+        format_up =   "<span background='#f6821f' foreground='#337e39'></span><span background='#337e39' foreground='#fff' >  %ip  </span>"
+        format_down = "<span background='#f6821f' foreground='#337e39'></span><span background='#337e39' foreground='#e73c34' >    </span>"
+		separator = false
+        separator_block_width = 0
+}
+
+cpu_usage {
+        format = "<span background='#337e39' foreground='#3a4ba5'></span><span background='#3a4ba5' foreground='#fff'>  CPU:%usage</span>"
+        separator = false
+        separator_block_width = 0
+}
+
+memory {
+        format = "<span background='#3a4ba5' foreground='#3a4ba5'></span><span background='#3a4ba5' foreground='#fff'>MEM:%percentage_used  </span>"
+        threshold_degraded = "1.4G"
+        format_degraded = "MEM %used"
+        separator = false
+        separator_block_width = 0
+}
+
+tztime local {
+		format = "<span background='#3a4ba5' foreground='#dfdfdd'></span><span background='#dfdfdd' foreground='#000' >  %a %d/%m %H:%M  </span>"
+        separator = false
+        separator_block_width = 0
+}
 
 volume master {
-        format = "%volume"
+        format = "<span background='#dfdfdd' foreground='#1c1c1c'></span><span background='#1c1c1c' foreground='#fff'>  %volume </span>"
         format_muted = "%muted "
         device = "default"
         mixer = "Master"
         mixer_idx = 0
-}
-
-ethernet _first_ {
-        format_up = "eth"
-        format_down = "eth"
-}
-
-ethernet cloudflare {
-        format_up = "<span foreground='#f55b27'>cloudflare</span>"
-        format_down = "cloudflare"
-}
-
-
-wireless _first_ {
-        format_up = "W: (%quality at %essid)"
-        format_down = "W: down"
-}
-
-cpu_usage {
-        format = "CPU:%usage"
-}
-
-
-memory {
-        format = "MEM:%used"
-        threshold_degraded = "1.4G"
-        format_degraded = "MEM %used"
-} 
-
-tztime local {
-        format = "%a %-d %b [%H:%M]"
+		separator = false
+        separator_block_width = 0
 }
